@@ -9,6 +9,19 @@ const quoteSchema = new mongoose.Schema({
         type: String,
         default: 'Unknown'
     }
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+        }
+    },
+    toObject: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+        }
+    }
+}
+);
 
 module.exports = mongoose.model('Quote', quoteSchema);
